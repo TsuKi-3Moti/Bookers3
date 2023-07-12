@@ -58,3 +58,4 @@ deviseの導入手順
 6.rails db:migrate でマイグレーションファイルを読み込む
 
 devise
+ffi
