@@ -1,0 +1,61 @@
+REPL リプル (read-eval-print loop  対話型評価環境)
+  プログラミング言語の実行環境の一つ
+  利用者が入力欄にキーボードなどから式や文を一行入力すると、
+  即座に解釈・実行して結果を返し、再び入力可能になるもの。
+
+irb イーアールビー (Interactive Ruby インタラクティブ ルビー )
+  RubyにおけるREPL。ターミナルでRubyのコードを動かすことができる
+
+★新しいアプリケーションを作る際の手順
+1.rails new アプリケーション名
+  アプリケーションのひな形作成
+
+  ・rm -rf アプリケーション名
+    アプリケーションの削除
+
+2.cd アプリケーション名
+  作成したアプリケーションに移動
+
+3.git init
+  ※.gitがない場合のみ
+
+4.このコミット前の段階で、gitignoreにgitの管理下に置きたくないファイルの記述を確認、追加
+  /db/*.sqlite3
+  /db/*.sqlite3-*  があることを確認
+  ↑の記述でマイグレーションで自動で作られるファイルがgitの管理下に置かれないようになっている
+  この記述がgitに上がるといらないconflictが起きる
+  ・macの場合、自動で隠しファイル.DS_Storeがgitに上がってしまい、windowsと作業している際にコンフリクトの原因になるため、
+    macユーザーは.DS_Storeの記述を追加
+
+5.MVCの作成
+
+6.git add -A
+  git commit -m "first commit"
+  git remote add origin リモートリポジトリのURL(SSH)
+  git push -u origin ブランチ名                             #-uをつけて、git pushのdefault設定
+
+7.チームメンバーはcloneして開発を進める
+  git clone リポジトリURL(SSH)
+
+8.git branch で現在あるブランチの確認
+  カレントブランチには*がついている
+  *mainになっているか確認
+
+9.git checkout -b 統合ブランチ名
+  git branchで確認
+
+
+deviseの導入手順
+
+1.gemファイルにgem 'devise'を最後に追加
+2.bundle install
+3.rails g devise:installでdeviseをインストール
+4.rails g devise モデル名(UserやCustomer)というdevise独自のコマンドでdeviseを使用したユーザーモデルが作成できる
+  例：rails g devise Userの場合
+    User モデル（ユーザ情報を操作する）
+    users テーブルのマイグレーションファイル（ユーザ情報を保存する）が作成される
+5.users テーブルのマイグレーションファイルに必要なカラムを追加で記述
+6.rails db:migrate でマイグレーションファイルを読み込む
+
+devise
+ffifdsa
