@@ -1,0 +1,187 @@
+モデルの作成
+$ rails g model モデル名
+
+（rails gの後に、作成したいもの(controllerやmodel)を指定することで、必要なファイルをまとめて作成できる）
+
+モデル名　英数字の単数形で指定、先頭は必ず英大文字で記述
+
+username:~/environment/first_app $ rails g model List
+Running via Spring preloader in process 4271
+      invoke  active_record
+      create    db/migrate/20180907051856_create_lists.rb
+      create    app/models/list.rb
+      invoke    test_unit
+      create      test/models/list_test.rb
+      create      test/fixtures/lists.yml
+
+
+生成されるファイル
+	rails g modelコマンドを実行すると、4つのファイルが生成される
+このうち、特に重要なファイルは上側の2つ
+
+ db/migrate/（作成日時）_create_lists.rb
+「migrationファイル」というデータベースの設計図になるファイル
+
+ app/models/list.rb
+		モデルクラスはデータベースに対応したRubyのクラス
+
+ test/models/list_test.rb
+モデルクラスのテストコードのひな形です。
+
+ test/fixtures/lists.yml
+テストデータ作成のためのひな形です。
+
+
+	migrationファイル　マイグレーション「移行」
+テーブルの作成や変更を管理するファイル
+このファイルに記述される内容によって、テーブル名やカラム名、テーブルの列などが決定する
+
+20180907051856_create_lists.rb
+（作成日時）create（テーブル名）.rb
+
+テーブル名には「モデル名の複数形」が自動的に割り振られる
+
+モデルとテーブルの繋がりは「モデル名」で決まる
+		情報はテーブルに保存され、テーブルに保存された情報を引き出すのは、そのテーブルに対応するモデル
+
+		どのテーブルとモデルが関連付けられているかは名前によって判断される
+→命名の規則が厳密に決められている
+
+	モデルの命名規則
+
+
+
+
+
+
+※別のメッセージが表示された場合は、実行している場所がアプリケーションの環境（railsgで作成したディレクトリの下）
+ではない場合、以下のようなメッセージが表示されます。cdコマンドで移動
+
+
+
+migrationファイルを作成する
+	migrationファイルを用意して、テーブルの作成をする
+	migrationファイルはモデルを作成した際に自動生成されているため、あとは編集するだけ
+
+	create_tableメソッドを「do」から「end」内に記述することで、カラムを定義できる
+
+def change
+  create_table :テーブル名 do |t|
+    t.データ型 :カラム名
+  end
+end
+
+migrationファイルをデータベースへ反映し、テーブルを作成する
+	ここまでの記述で、カラムの定義が完成したが、まだテーブルは作成されていないため、
+migrationファイルからデータベース上にテーブルを作成しなくてはならない
+
+	username:~/environment/first_app $ rails db:migrate
+	== 20180915070641 CreateLists: migrating ======================================
+-- create_table(:lists)
+   -> 0.0016s
+== 20180915070641 CreateLists: migrated (0.0024s) ============================
+
+
+エラー文
+migrationファイルは存在するにもかかわらず、テーブルが作成されていない時
+
+
+
+migrationファイルに問題がある時
+migrationファイルやrails g modelコマンドを確認してみてください。
+
+schemaファイル　スキーマ「データ構造」を確認する
+	マイグレーションファイルを反映しテーブルを作成すると、db/schema.rbというファイルが作成される
+	データベースの定義を確認することができる
+
+		ActiveRecord::Schema.define(version: migrate日時) do
+
+  create_table "lists", force: :cascade do |t|
+    t.string "title"
+    t.string "body"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+end
+
+		マイグレーションファイルに記述したtitleカラムとbodyカラムがあるため、
+マイグレーションファイル通りのデータ構造になっていることが確認できる
+
+どのようなカラムが作られていて、どのようなカラムが存在しないのかが一目でわかるため、
+schemaファイルを見る癖をつけておくこと
+
+
+カラムの追加/削除
+追加コマンド
+
+		$ rails g migration Addカラム名Toテーブル名 カラム名:型名
+
+例「lists」テーブルに文字列型の「name」というカラムを追加したい場合
+
+			$ rails g migration AddNameToLists name:string
+$ rails db:migrate
+
+削除コマンド
+
+		$ rails g migration Removeカラム名Fromテーブル名 カラム名:型名
+
+		例 先ほど追加した「name」カラムを削除したい場合
+
+			$ rails g migration RemoveNameFromLists name:string
+$ rails db:migrate
+
+
+リセットとロールバック
+$ rails db:migrate:status
+
+赤枠はマイグレーションファイルの一覧
+緑枠はマイグレーションファイルのステータス
+
+
+
+upとdown
+	マイグレーションファイルのステータスにはupとdownという2つの状態が存在する
+
+	upとはマイグレーションファイルがmigrate（移行）されている状態を指し、
+反対にdownはmigrate（移行）されていない状態を指す
+
+マイグレーションファイルは、upの状態ではmigrateをすることができないため、
+一度実行したマイグレーションファイルの中身を修正してmigrateしようとしてもうまくいかない
+
+マイグレーションファイルを修正してデータベースに反映したい場合
+upからdownにステータスを変更したうえで再度migrateする必要がある
+
+リセット
+		一度すべてのマイグレーションファイルをdownにして、
+再度すべてのマイグレーションファイルをmigrateする
+
+$ rails db:migrate:reset
+
+	downにするとき、テーブルは一度削除されてしまうため、
+テーブル内のデータが消えてしまうことに注意が必要です。
+
+マイグレーションファイルを修正
+rails db:migrate:resetコマンドを入力してマイグレーションファイルをリセット
+db/schema.rbでテーブルを確認
+
+複数のマイグレーションファイルに修正が必要なとき
+テーブルをすべて削除し、データをリセットしたいとき
+
+ロールバック
+	一番最後にmigrateしたマイグレーションファイルをupからdownの状態にする
+
+$ rails db:rollback
+
+rails db:rollbackコマンドを入力してマイグレーションファイルをdownにする
+rails db:migrate:statusコマンドを入力してマイグレーションファイルのステータス確認
+何か変更をデータベースに反映したい場合は、ステータスがdownになっているマイグレーションファイルを編集する
+rails db:migrateコマンドを入力してマイグレーションファイルをupにする
+
+直前のマイグレーションファイルのみを再度migrateしたいとき
+
+		STEP
+			複数のマイグレーションファイルをdownの状態にできる
+
+			例　3つのマイグレーションファイルをdownにしたい
+				$ rails db:rollback STEP=3
