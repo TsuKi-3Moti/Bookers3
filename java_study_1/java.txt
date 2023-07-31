@@ -1,0 +1,123 @@
+class Main {
+  public static void main(String[] args) {
+    System.out.println("Hello World");
+  }
+}
+
+//から行末までがコメントアウト
+
+処理の最後に；セミコロンを付ける
+
+System.out.println("Hello World");
+()の中身を出力せよ lは小文字エル
+
+データ型
+String型 文字列 ※Sは大文字
+int型    整数   ※iは小文字
+
+Javaで変数を定義するには
+①変数にいれる値のデータ型を指定する
+②変数の名前を決める
+
+データ型 変数名;
+
+例 int number;
+   String name;
+
+代入
+変数名 = 値
+
+例 int number;
+   number = 3;
+
+
+
+★変数の初期化 = 変数定義と同時に値の代入も行う
+例 int number = 3;
+   String text = "Hello World";
+   
+   
+   
+int型の変数であれば、数値同様そのまま計算が可能
+※to_iのようなものは必要ない
+
+String型の変数であれば、文字列同様そのまま連結が可能
+
+
+
+★変数の更新
+✕
+int number = 3;
+int number = 4;
+
+〇
+int number = 3;
+number = 5;
+
+値を更新するときはデータ型はつけない！
+◆データ型を付けるのは新しい変数を定義するとき
+
+
+
+自己代入
+int x = 3;
+System.out.println(x);
+x = x + 2;
+
+
+
+自己代入の省略
+x = x + 10; → x += 10; → x++; // このように1を足すときはさらに省略可
+x = x + 10; → x -= 10; → x--; // このように1を引くときはさらに省略可
+
+x = x + 10; → x *= 10;
+x = x + 10; → x /= 10;
+x = x + 10; → x %= 10;
+
+
+
+変数の命名規則
+英単語、2語以上の場合はキャメルケースをつかう
+✕数字開始はエラー
+
+△アンダーバー（スネークケース）、ローマ字、日本語
+  望ましくない
+
+例 date
+   userName
+
+
+
+double型 ダブル型 小数(小数点以下を持つ数) ダブル
+例 3   int型
+   3.0 double型
+
+
+
+型変換
+
+・自動型変換
+String型とint型を足すと、int型が自動でString型に変換され、文字列の結合が行われる。
+
+int型とdouble型の計算では結果はdouble型
+整数は必ず小数でも表せるため自動で変換される
+
+例 System.out.println(5.0 / 2); // 5.0 / 2.0 というようにdouble型に変換される
+   2.5
+
+int型の計算結果 int型
+double型の計算結果 double型
+※int型の5をint型の2で割ると、結果は「2.5」ではなく「2」となる！
+  つまり小数点以下は切り捨てられ、正確な値が出ない
+  
+↓そんな時に
+
+◆キャスト 強制的に型変換をする
+(変換したいデータ型)値
+
+int number1 = 13;
+int number2 = 4;
+System.out.println((double)number1 /number2);
+①どちらかをキャストすることで、number1の値がdouble型に変換される 13.0 / 4
+②片方がdouble型であれば結果はdouble型になるので、number2の値がdouble型に変換される 13.0 / 4.0
+③結果 3.25
