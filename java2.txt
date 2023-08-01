@@ -1,0 +1,162 @@
+boolean型 ※ダブルクオーテーションはつけない様に
+
+
+
+!() ~じゃない
+例 System.out.println(!(5 < 8));
+
+
+
+if文
+()に条件式、{}に処理（ブロック）※ブロックの後ろはセミコロン不要！
+
+  if (天気 == 雨) {
+    傘を持っていく;
+  }
+
+
+
+else, else if ※elsifじゃないので注意
+
+  int x = 40;
+  if (x < 30) {
+    System.out.println("xは30より小さい");
+  } else {
+    System.out.println("xは30以上");
+  }
+
+
+
+switch文 条件の値がcaseの値と一致するとき、処理が実行される
+
+if文で「n == 1」のようなものはswitch文に置き換えられる
+
+  switch (条件の値) {
+      case 値①: // caseの値の後ろには:コロンをつける！
+        処理;
+        break; // break;がないと、合致したcaseの処理の後、次のcaseの処理も実行してしまうので必ずつける！
+      case 値②:
+        処理;
+        break;
+  }
+
+  int n = 1;
+  switch (n) {
+    case 1:
+      System.out.println("大吉です");
+      break;
+    case 2:
+      System.out.println("吉です");
+      break;
+    default: //どのcaseとも一致しなかった場合に実行する処理を default に指定できる（if文のelseのようなもの）
+      System.out.println("凶です");
+      break;
+  }
+  
+
+while文 条件がtrueの間、ブロック内の処理を繰り返す
+
+  while (条件) {
+    繰り返す処理;
+  }
+
+  int i = 1; // ①変数の初期化　while文を繰り返すかどうかの判断に使われる
+  
+  while (i <= 5) { // ②、⑤条件式のチェック
+    System.out.println(i); // ③繰り返す処理
+    i++; // ④変数の更新 ※変数の中身が更新されないと無限ループが起きてしまう！どこかでfalseになるようにすること！
+  }
+
+変数の更新後、再び条件がチェックされる
+
+
+
+for文
+
+  for (int i = 1; i <= 5; i++) { // ①変数の初期化、②条件、④変数の更新
+    System.out.println(i); // ③繰り返す処理
+  }
+
+① 変数の初期化、②条件、④変数の更新の三つを()の中にセミコロンで区切って記述。
+★変数の更新の後ろにはセミコロンを付けない！
+
+while文に比べてすっきりと書けることが多い
+
+
+
+繰り返し処理を終了させるには
+条件をfalseにするか
+
+◆breakを使って強制的に終了させるか
+→ if文などの条件分岐と組み合わせることで任意の箇所で繰り返し処理を終了させる
+
+例 
+for (int i = 1; i <= 10; i++) {
+  if (i > 5) {
+    break;
+  }
+  System.out.println(i);
+}
+
+
+
+◆continue その周の処理だけをスキップして、次の周を実行する
+→ if文などの条件分岐と組み合わせる
+
+例 
+for (int i = 1; i <= 10; i++) {
+  if (i % 3 == 0) {
+    continue;
+  }
+  System.out.println(i);
+}
+
+
+
+★配列型は要素のデータ型を指定する必要がある
+
+int型の要素を持つ配列型 → int[]
+String型の要素を持つ配列型 → String[]
+
+
+
+配列の作り方
+
+例
+int[] numbers = {5, 13, 29};
+String[] names = {"John", "Kate", "Bob"};
+
+要素はインデックス番号を指定して取得する
+インデックス番号を指定して取得した要素に値を代入すると、要素を上書きできる
+※存在しない要素(インデックス番号)には代入しようとするとエラーになる！
+
+
+
+配列の繰り返し
+  for文
+    String[] names = {"John", "Kate", "Bob"};
+    for (int i = 0; i < 3; i++) { // ①変数の初期化、②条件、④変数の更新
+      System.out.println("Hello " + names[i]); // ③繰り返す処理
+    }
+  
+  length レングス 要素の数を数える
+  配列.length
+  
+    String[] names = {"John", "Kate", "Bob"};
+    for (int i = 0; i < names.length; i++) { //配列の要素数を.lengthで置き換えられる
+      System.out.println("Hello " + names[i]);
+    }
+  
+  ★拡張for文 よりシンプルにfor文を書ける
+  
+    for (データ型 変数名:配列名) {
+      繰り返す処理;
+    }
+    
+    String[] names = {"John", "Kate", "Bob"};
+    for (String name: names) {
+      System.out.println(name);
+    }
+    
+    ブロック変数みたいなノリでnamesのそれぞれが変数nameに順に代入されていく
+    
