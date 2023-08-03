@@ -1,0 +1,84 @@
+★void ヴォイド「戻り値がない(returnがない)」メソッドに指定するもの
+
+◆メソッドの定義
+
+  public static void メソッド名() {
+    実行する処理;
+  }
+
+  例
+  public static void hello() {
+    System.out.println("Hello World");
+  }
+
+★メソッドはクラスの中(ブロック内)に定義しないとエラーになる
+
+
+
+◆メソッドの呼び出し
+
+  メソッド名();
+
+
+
+◆引数を受け取るメソッドを定義する
+  引数を受け取るためのは異なる変数(仮引数)を指定する
+
+  public static void メソッド名(データ型 変数名) {
+    実行する処理;
+  }
+
+  class Main {
+    public static void main(String[] args) {
+      hello("Bob");
+    }
+
+    public static void hello(String name) {
+      System.out.println(name + " さんこんにちは");
+    }
+  }
+
+
+
+★複数の引数を持つメソッド
+
+  public static void メソッド名(データ型 変数名1, データ型 変数名2) {
+    実行する処理;
+  }
+
+  引数は左から順に 第1引数、第2引数... と呼ぶ
+
+  例
+  public static void printPrice(String item, int price) {
+    System.out.println(item + "は" + price + "円です");
+  }
+
+  ※メソッド呼び出しで複数の引数を渡すときは、
+    仮引数の順番通りに渡さないとデータ型の違いでエラーになる
+
+
+
+◆メソッドの呼び出し元に戻り値を返したいとき　return
+  ※Rubyはいらない
+
+  「public static void」のvoidの部分で戻り値のデータ型を指定
+
+  public static 戻り値のデータ型 メソッド名(引数) {
+    return 戻り値;
+  }
+
+  例
+  public static int add(int a, int b) {
+    return a + b;
+  }
+
+  戻り値がある場合、メソッドの呼び出し部分がそのまま値に変わり
+  メソッドの呼び出し部分を、変数に代入することができる
+
+
+同じ名前のメソッドは原則定義不可 コンピュータさんが困惑
+But, 引数の型や個数が違う場合は定義可能
+
+◆オーバーロード 引数の型や個数が違う場合に同名のメソッドを定義すること
+
+◆メイン以外のメソッドからメソッドを呼ぶ
