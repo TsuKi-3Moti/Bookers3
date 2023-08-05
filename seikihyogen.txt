@@ -1,0 +1,4 @@
+正規表現 regular expression　レギュラーイクスプレッション
+Regex レゲックス
+
+

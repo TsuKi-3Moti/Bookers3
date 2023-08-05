@@ -1,0 +1,238 @@
+★void ヴォイド「戻り値がない(returnがない)」メソッドに指定するもの
+
+◆メソッドの定義
+
+  public static void メソッド名() {
+    実行する処理;
+  }
+
+  例
+  public static void hello() {
+    System.out.println("Hello World");
+  }
+
+★メソッドはクラスの中(ブロック内)に定義しないとエラーになる
+
+
+
+◆メソッドの呼び出し
+
+  メソッド名();
+
+
+
+◆引数を受け取るメソッドを定義する
+  引数を受け取るためのは異なる変数(仮引数)を指定する
+
+  public static void メソッド名(データ型 変数名) {
+    実行する処理;
+  }
+
+  class Main {
+    public static void main(String[] args) {
+      hello("Bob");
+    }
+
+    public static void hello(String name) {
+      System.out.println(name + " さんこんにちは");
+    }
+  }
+
+
+
+★複数の引数を持つメソッド
+
+  public static void メソッド名(データ型 変数名1, データ型 変数名2) {
+    実行する処理;
+  }
+
+  引数は左から順に 第1引数、第2引数... と呼ぶ
+
+  例
+  public static void printPrice(String item, int price) {
+    System.out.println(item + "は" + price + "円です");
+  }
+
+  ※メソッド呼び出しで複数の引数を渡すときは、
+    仮引数の順番通りに渡さないとデータ型の違いでエラーになる
+
+
+
+◆メソッドの呼び出し元に戻り値を返したいとき　return
+  ※Rubyはいらない
+
+  「public static void」のvoidの部分で戻り値のデータ型を指定
+
+  public static 戻り値のデータ型 メソッド名(引数) {
+    return 戻り値;
+  }
+
+  例
+  public static int add(int a, int b) {
+    return a + b;
+  }
+
+  戻り値がある場合、メソッドの呼び出し部分がそのまま値に変わり
+  メソッドの呼び出し部分を、変数に代入することができる
+
+
+同じ名前のメソッドは原則定義不可 コンピュータさんが困惑
+But, 引数の型や個数が違う場合は定義可能
+
+◆オーバーロード 引数の型や個数が違う場合に同名のメソッドを定義すること
+
+◆メイン以外のメソッドからメソッドを呼ぶ
+
+averageメソッド 平均を求める[(a + b) / 2]
+
+  publilc static void main(String[] args) {
+    System.out.println(average(3,8));
+  }
+  
+  public static double average(int a, int b) {
+    int total = add(a,b); 
+    return(double)total / 2;
+  }
+  
+  // add(a,b); の処理
+  
+    public static int add(int a, int b){
+      return a + b;
+    }
+  
+  
+  
+◆真偽値を返すメソッド
+  
+  boolean型
+  
+  ２で割った余りが0(つまり偶数)であればture
+    public static boolean isEven(int a) {
+      return a % 2 == 0;
+    }
+  
+  public static void main(String[] args) {
+    int number = 9;
+    if(isEven(number)) {
+      System.out.println(number + " は偶数です");
+    } else {
+      System.out.println(number + " は奇数です");
+    }
+  }
+  
+
+
+
+◆クラス
+
+  ★他クラスのメソッドを利用することも可能
+  
+◆他クラスのメソッドの呼び出し
+  
+  class Main {
+    public static void main(String[] args) {
+      Person.hello(); // ドットでPersonクラスのhelloメソッドを呼び出す
+    }
+  }
+  
+  class Person {
+    public static void hello() {
+      System.out.println("Hello World");
+    }
+  }
+  
+
+
+◆クラスの定義
+
+  クラス名　　→　Person　// 最初の文字は大文字
+  ファイル名　→　Person.java　// クラス名.java ※最初の文字は大文字
+
+
+mainメソッド以外の「ロジック(論理)」部分をPersonクラスにまとめ、
+実行部分とロジック部分を切り分けて役割分担を明確に
+
+  Mainクラス　　→　実行用のクラス
+  Personクラス　→　ロジックをまとめるクラス
+  
+
+
+
+★Javaは、ファイルではなくクラスを実行
+
+★クラス名に関係なく、実行時にはmainメソッドが呼ばれる
+  ※Mainクラスだからmainメソッドが呼ばれる、というわけではない！
+
+★実行時にmainメソッドが呼ばれるが、正確にはmainメソッドを持つクラスしか実行できない
+（mainメソッドのないクラスは、他クラスから呼び出して使う）
+
+
+
+◆外部ライブラリ(他人が作ったクラス)を利用できる　RubyでいうところのGem
+
+◆import 外部ライブラリを自分のプログラムに組み込むときに使う
+
+  例【外部ライブラリ】Math
+
+  ●Main.java
+
+  import java.lang.Math; // java.lang はMathクラスの場所を示している
+  class Main {
+    public static void main(String[] args) {
+      int max = Math.max(3,8); //外部から読み込んだMathクラスのmaxメソッド
+      System.out.println("最大値は" + max + "です");
+    }
+  }
+
+  ★roundメソッド(Mathクラスのメソッド)　小数点以下を四捨五入できる
+
+  例
+  System.out.println("BMIは" + Math.round(bmi) + "です");
+
+Sucanner
+
+★「java.lang.クラス名」の形になる外部ライブラリはimportしなくともすべて自動で読み込まれる
+
+
+
+◆【外部ライブラリ】Scanner スキャナ　コンソールへの入力を受け取る
+  Sucannerを初期化したものを代入した変数を使用してメソッドを呼び出す
+  
+  ●文字列を受け取る場合
+  
+    import java.util.Scanner;
+    
+    class Main {
+      public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in); // Scannerの初期化
+        System.out.print("あなたの名前:"); // lnなしだと改行せずに値を出力
+        String name = scanner.next(); // ★文字列の入力を受けとる Scanner.next()
+        System.out.println("あなたの名前は" + name + "です");
+      }
+    }
+  
+    ★System.out.print   値を出力（改行あり）
+      System.out.println 値を出力（改行なし）
+      
+    scanner.next()が呼ばれると一旦処理が中断されて、コンソールに値が入力されるの待ちになる
+  
+  
+  ●整数、小数を受け取る
+  
+    import java.util.Scanner;
+    
+    class Main {
+      public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in); // Scannerの初期化
+        
+        System.out.print("年齢: ");
+        int age = scanner.nextInt(); // ★整数を受けとる scanner.nextInt()
+        
+        System.out.print("体重: ");
+        double weight = scanner.nextDouble(); // ★小数を受けとる scanner.nextDouble()
+        
+        System.out.println("あなたの年齢は" + age + "歳です");
+        System.out.println("あなたの体重は" + weight + "kgです");
+      }
+    }
+    
