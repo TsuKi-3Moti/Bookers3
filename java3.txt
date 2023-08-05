@@ -82,3 +82,41 @@ But, 引数の型や個数が違う場合は定義可能
 ◆オーバーロード 引数の型や個数が違う場合に同名のメソッドを定義すること
 
 ◆メイン以外のメソッドからメソッドを呼ぶ
+
+averageメソッド 平均を求める[(a + b) / 2]
+
+  publilc static void main(String[] args) {
+    System.out.println(average(3,8));
+  }
+  
+  public static double average(int a, int b) {
+    int total = add(a,b); 
+    return(double)total / 2;
+  }
+  
+  // add(a,b); の処理
+  
+    public static int add(int a, int b){
+      return a + b;
+    }
+  
+  
+  
+◆真偽値を返すメソッド
+  
+  boolean型
+  
+  ２で割った余りが0(つまり偶数)であればture
+    public static boolean isEven(int a) {
+      return a % 2 == 0;
+    }
+  
+  public static void main(String[] args) {
+    int number = 9;
+    if(isEven(number)) {
+      System.out.println(number + " は偶数です");
+    } else {
+      System.out.println(number + " は奇数です");
+    }
+  }
+  
