@@ -175,3 +175,52 @@
   ※クラスさえあれば呼び出せるため、インスタンスを生成しない状態でも呼び出せる
 
 
+
+◆変数の初期値
+  それぞれデータ型によって、変数の初期値が決まっている
+  
+  String   →   null
+  int      →   0
+  double   →   0.0
+  boolean  →   false
+  
+
+
+
+◆カプセル化 privateとpublicによるアクセス制限
+  
+  private クラス内からのみアクセス可能
+  public  クラス外からもアクセス可能
+  
+  
+  ●ゲッター
+    フィールドをprivateにした上で、クラス外から安全にフィールドの値を取得するために、
+    フィールドの値を返すだけのメソッドを定義
+    「getフィールド名」 一般的な形
+    
+    例 private String middleName; //プライベートなインスタンスフィールド
+    
+       public String getMiddleName() { // パブリックかつゲッターを使ったインスタンスメソッド 
+         return this.middleName; // ゲッターを使っているため、インスタンスフィールドの値を返す
+       }
+       
+       これであれば、外部からでもインスタンスの代入された変数名.getMiddleNameで取得可能！
+  
+  ●セッター
+    フィールドをprivateにした上で、クラス外から安全にフィールドの値を変更するために
+    フィールドの値を変更するメソッドを定義
+    「setフィールド名」一般的な形
+    
+    
+    例 外部で、インスタンスの代入された変数名.setMiddleName("Claire") ※変更するのでset
+    
+       private String middleName; //プライベートなインスタンスフィールド
+    
+       public void setMiddleName(String middleName) { // パブリックかつセッターを使ったインスタンスメソッド 
+         this.middleName = middleName; // セッターを使っているため、インスタンスフィールドの値をセットして返す
+       }
+       
+       外部からでも、インスタンスの代入された変数名.getMiddleName()で取得可能！
+       ※setはあくまで変更なので、変更後の値を取得するときはget
+       
+       
