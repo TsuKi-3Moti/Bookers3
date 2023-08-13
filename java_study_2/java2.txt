@@ -159,4 +159,4 @@ String[] names = {"John", "Kate", "Bob"};
     }
     
     ブロック変数みたいなノリでnamesのそれぞれが変数nameに順に代入されていく
-    
+  
