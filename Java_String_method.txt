@@ -1,0 +1,114 @@
+
+◆concat() コンキャット
+  引数で指定された文字列をこの文字列の最後に連結して返す
+  
+  前の文字列.concat(後ろの文字列);
+  
+  public class Test {
+    public static void main(String[] args) {
+      // 文字列を定義
+      String strA = "プログラミング";
+      String strB = "教室";	
+      
+      // 文字列結合
+      ★String result = strA.concat(strB);
+  	
+      // 出力
+      System.out.println(result);
+    }
+  }
+  
+  パラメータ:
+  strB - このStringの最後に連結されるString。
+
+
+
+◆join()
+  delimiterで区切られたelementsからなる新しいStringを返す
+  インスタンス.join(各要素を区切る区切り文字, 結合する要素１, 結合する要素２, 結合する要素３)
+
+  public class Test {
+    public static void main(String[] args) {
+      // 文字列結合
+    ★String result = String.join(",", "One", "Two", "Three");
+      // 出力
+      System.out.println(result);
+    }
+  }
+
+     String message = String.join("-", "Java", "is", "cool");
+     // message returned is: "Java-is-cool"
+ 
+  ※要素がnullの場合は、"null"が追加される
+  
+  パラメータ:
+  delimiter - 各要素を区切る区切り文字
+  elements - 結合する要素。
+
+◆sprit()
+  この文字列を引数で指定された正規表現に一致する位置で分割して計算された文字列の配列を返す
+  インスタンス.sprit(区切り文字の指定正規表現)
+  次の式が指定された場合の、文字列"boo:and:foo"の結果
+    :の場合	{ "boo", "and", "foo" }
+    oの場合	{ "b", "", ":and:f" }
+
+
+
+◆substring()
+  引数でインデックスを指定して、この文字列の部分文字列である文字列を返す
+  
+  ・public String substring(int beginIndex)
+    
+    引数1つの時、部分文字列は、引数で指定されたインデックスからこの文字列の最後まで
+    
+    例
+     "unhappy".substring(2) returns "happy" //インデックス2から最後まで
+     "Harbison".substring(3) returns "bison"
+     "emptiness".substring(9) returns "" (an empty string)
+     
+  ・public String substring(int beginIndex, int endIndex)
+  
+    引数2つの時、部分文字列は、引数で指定されたbeginIndexから始まり、インデックスendIndex - 1にある文字までです。
+    したがって、部分文字列の長さはendIndex-beginIndex
+
+    例
+     "hamburger".substring(4, 8) returns "urge"
+     "smiles".substring(1, 5) returns "mile"
+ 
+    パラメータ:
+    beginIndex - 開始インデックス(この値を含む)。
+    endIndex - 終了インデックス(この値を含まない)。
+
+
+
+◆indexOf()
+  public int indexOf(int ch)
+  この文字列内で、引数で指定された文字が最初に出現する位置のインデックスを返す。文字がない場合は-1を返す。
+  substringがインデックスを指定して文字,文字列を返すのに対し、indexOfは文字を指定してインデックスを返す。
+  ※前から調べるときはindexOf、後ろから調べたいときはlastIndexOf
+  
+  ？値chを持つ文字がこのStringオブジェクトによって表される文字シーケンス内にある場合、最初に出現する位置のインデックス(Unicodeコード単位)が返されます。chの値が0から0xFFFFの範囲にある場合、次の式がtrueとなるような最小値kが返されます。
+     this.charAt(k) == ch　がtrueである。chがほかの値の場合、次の式がtrueとなるような最小値kです。
+     this.codePointAt(k) == ch　がtrueである。該当する文字がこの文字列内にない場合は、-1が返されます。
+     
+  パラメータ:
+  ch - 文字(Unicodeコード・ポイント)。
+
+
+
+◆charAt
+  文字列内の引数で指定されたインデックス位置にあるchar値を返す。最初のchar値のインデックスは配列同様0
+  
+  public char charAt(int index)
+  
+  ？インデックスで指定されたchar値がサロゲートの場合、サロゲート値が返されます。
+  
+  例
+    "ありがとう".charAt(3); returns "と"
+  
+  パラメータ:
+  index - char値のインデックス。
+
+
+
+◆
