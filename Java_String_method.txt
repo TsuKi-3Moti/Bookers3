@@ -111,4 +111,14 @@
 
 
 
-◆
+boolean
+
+◆contains(char値)
+
+  public boolean contains(CharSequence s)
+  この文字列が引数で指定されたchar値のシーケンスを含む場合に限りtrueを返します。
+  パラメータ:
+  s - 検索するシーケンス
+  
+  戻り値:
+  この文字列がsを含む場合はtrue。そうでない場合はfalse
