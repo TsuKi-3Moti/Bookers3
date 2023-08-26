@@ -325,3 +325,130 @@ public class Main {
         }
     }
 }
+
+
+
+ // 配列を使う場合
+// String.join()　第一引数でdelimiter、第二引数でelements(配列など)を指定するとdelimiterで結合されたelementsのStringが返る
+// String.joiner() 引数一つでjoinのように使うことも可能
+// 更に第二引数にprefix、第三引数でsuffixを指定することもできる
+
+
+import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String num = sc.next();
+        
+        for (int i = 0; i < num.length(); i++) {
+            if (i != 0 && i % 3 == 0) {
+                System.out.print(",");
+            }
+            
+            System.out.print(num.charAt(i));
+        }
+    }
+}
+
+
+
+// 大きな数値(intで扱える最大値を超えた数値を含む)を三桁ごとにカンマ区切りで出力
+// 大きな数値(intで扱える最大値を超えた数値を含む)Nが与えられる
+// このときのNの桁数は必ず３の倍数とする
+// Nを三桁ごとにカンマ区切りで出力
+import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String num = sc.next();
+        
+        for (int i = 0; i < num.length(); i++) {
+	   // 0 % 3も0となって該当してしまうため、条件にiが0じゃないときを加える
+            if (i != 0 && i % 3 == 0) {
+                System.out.print(",");
+            }
+            System.out.print(num.charAt(i));
+        }
+    }
+}
+
+// ★index値が3の倍数であるときに、その値の前にカンマを付ける考え方であれば、index値に対する値が3の倍数の後にカンマを付ける考え方の時と違い、余分なカンマを防止できる
+
+
+
+// 大きな数値Nが入力されます。 位の小さい方から 3 けたごとにカンマ区切りで出力してください。
+// ただし、Nのけた数は 3 の倍数とは限りません。
+
+
+
+// 9 個の数値が半角スペース区切りで入力されます。この数値を 3 行 3 列の形式で出力してください。
+// 具体的には、入力された数値を N_1 , N_2 , N_3 , ..., N_9 とするとき、 1 行目にはN_1 からN_3 を、2 行目には N_4 から N_6 を、3 行目には N_7 から N_9 を出力してください。
+// ただし、数値の間には半角スペースを、各行の末尾には、半角スペースの代わりに改行を入れてください。
+
+import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        for (int i = 0; i < 9; i++) {
+            String N = sc.next();
+            System.out.print(N);
+
+            if (i % 3 == 2) {
+                System.out.println();
+            } else {
+                System.out.print(" ");
+            }
+
+        } 
+    }
+}
+
+
+
+// 九九表を出力してください。具体的には、出力のi行j列目 (1 ≦ i, j ≦ 9) の数値は i * j になるように出力してください。
+// ただし、数値の間には半角スペースを、各行の末尾には、半角スペースの代わりに改行を入れてください。
+
+// 二次元配列を使うことによって、表の各データを格納しておける
+import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+        int[][] nums = new int[9][9];
+        // 九九表を二次元配列で作る
+        for (int row = 0; row < 9; row++) {
+            for (int column = 0; column < 9; column++) {
+                nums[row][column] = (row + 1) * (column + 1);
+            } 
+        }
+        // 計算結果を出力する
+        for (int row = 0; row < 9; row++) {
+            for (int column = 0; column < 9; column++) {
+                System.out.print(nums[row][column]);
+                if (column == 8) {
+                    System.out.println();
+                } else {
+                    System.out.print(" ");
+                }
+            } 
+        }
+        
+    }
+}
+
+// データは格納せずに、その場で計算して出力
+import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+        
+        for (int row = 1; row <= 9; row++) {
+            for (int column = 1; column <= 9; column++) {
+                System.out.print(row * column);
+                if (column < 9) {
+                    System.out.print(" ");
+                } else {
+                    System.out.println();
+                }
+            } 
+        }
+    }
+}
